@@ -1,5 +1,5 @@
 import { LightningElement, api } from 'lwc';
-import { FlowAttributeChangeEvent, FlowNavigationNextEvent } from 'lightning/flowSupport';
+import { FlowAttributeChangeEvent, FlowNavigationNextEvent, FlowNavigationFinishEvent } from 'lightning/flowSupport';
 
 export default class FlowRecordButtons extends LightningElement {
     @api records = [];
@@ -8,6 +8,8 @@ export default class FlowRecordButtons extends LightningElement {
     @api subHeaderText;
     @api buttonColor = '#0070d2';
     @api buttonTextColor = '#ffffff';
+
+    @api availableActions = [];
 
     @api selectedRecord;
     @api selectedRecordId;
@@ -74,7 +76,11 @@ export default class FlowRecordButtons extends LightningElement {
         // Delay navigation to avoid race condition with attribute change events
         // eslint-disable-next-line @lwc/lwc/no-async-operation
         setTimeout(() => {
-            this.dispatchEvent(new FlowNavigationNextEvent());
+            if (this.availableActions.includes('NEXT')) {
+                this.dispatchEvent(new FlowNavigationNextEvent());
+            } else if (this.availableActions.includes('FINISH')) {
+                this.dispatchEvent(new FlowNavigationFinishEvent());
+            }
         }, 0);
     }
 }
