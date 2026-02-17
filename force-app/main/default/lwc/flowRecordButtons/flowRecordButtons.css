@@ -1,0 +1,31 @@
+.button-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.record-btn {
+    flex: 0 0 auto;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    border: 1px solid;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.4;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.record-btn:hover {
+    opacity: 0.85;
+    transform: translateY(-1px);
+}
+
+.record-btn:active {
+    transform: translateY(0);
+}
+
+.record-btn:focus {
+    outline: 2px solid #0070d2;
+    outline-offset: 2px;
+}

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>63.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Flow Record Buttons</masterLabel>
+    <description>Display a record collection as buttons. Clicking a button selects that record and navigates to the next flow screen. Works with any Salesforce object.</description>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <propertyType name="T" extends="SObject" label="Object Type" description="The Salesforce object type for the record collection" />
+
+            <property name="records"
+                      type="{T[]}"
+                      role="inputOnly"
+                      label="Records"
+                      description="Collection of records to display as buttons"
+                      required="true" />
+
+            <property name="displayFieldApiName"
+                      type="String"
+                      role="inputOnly"
+                      label="Display Field API Name"
+                      description="API name of the field to display as button text (e.g., Name, Subject, Title)"
+                      required="true"
+                      default="Name" />
+
+            <property name="headerText"
+                      type="String"
+                      role="inputOnly"
+                      label="Header Text"
+                      description="Optional heading displayed above the buttons" />
+
+            <property name="subHeaderText"
+                      type="String"
+                      role="inputOnly"
+                      label="Sub-Header Text"
+                      description="Optional helper text displayed below the heading" />
+
+            <property name="buttonColor"
+                      type="String"
+                      role="inputOnly"
+                      label="Button Color"
+                      description="Hex color for button background (e.g., #0070d2). Defaults to Salesforce blue."
+                      default="#0070d2" />
+
+            <property name="buttonTextColor"
+                      type="String"
+                      role="inputOnly"
+                      label="Button Text Color"
+                      description="Hex color for button text (e.g., #ffffff). Defaults to white."
+                      default="#ffffff" />
+
+            <property name="selectedRecord"
+                      type="{T}"
+                      role="outputOnly"
+                      label="Selected Record"
+                      description="The full record of the button that was clicked" />
+
+            <property name="selectedRecordId"
+                      type="String"
+                      role="outputOnly"
+                      label="Selected Record ID"
+                      description="The record ID of the button that was clicked" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

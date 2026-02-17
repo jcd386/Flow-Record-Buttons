@@ -1,0 +1,37 @@
+<template>
+    <!-- Header Section -->
+    <template if:true={hasHeader}>
+        <div class="slds-p-bottom_x-small">
+            <h3 class="slds-text-heading_small">{headerText}</h3>
+            <template if:true={hasSubHeader}>
+                <p class="slds-text-body_small slds-text-color_weak slds-m-top_xx-small">
+                    {subHeaderText}
+                </p>
+            </template>
+        </div>
+    </template>
+
+    <!-- Buttons -->
+    <template if:true={hasRecords}>
+        <div class="button-grid">
+            <template for:each={buttonItems} for:item="item">
+                <button key={item.key}
+                        class="record-btn"
+                        style={item.btnStyle}
+                        data-record-id={item.recordId}
+                        onclick={handleButtonClick}
+                        aria-label={item.ariaLabel}>
+                    {item.displayValue}
+                </button>
+            </template>
+        </div>
+    </template>
+
+    <!-- Empty State -->
+    <template if:false={hasRecords}>
+        <div class="slds-p-around_medium slds-text-align_center">
+            <lightning-icon icon-name="utility:info" size="small" alternative-text="No records"></lightning-icon>
+            <p class="slds-m-top_small slds-text-body_regular">No records to display</p>
+        </div>
+    </template>
+</template>
