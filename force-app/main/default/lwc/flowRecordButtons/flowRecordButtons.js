@@ -8,6 +8,7 @@ export default class FlowRecordButtons extends LightningElement {
     @api subHeaderText;
     @api buttonColor = '#0070d2';
     @api buttonTextColor = '#ffffff';
+    @api buttonColorFieldApiName;
     @api showSearch = false;
     @api searchPlaceholder = 'Search...';
     @api mode = 'auto'; // 'auto' | 'single' | 'multi'
@@ -58,7 +59,6 @@ export default class FlowRecordButtons extends LightningElement {
         if (!this.hasRecords) {
             return [];
         }
-        const bgColor = this.buttonColor || '#0070d2';
         const txtColor = this.buttonTextColor || '#ffffff';
         const term = this.searchTerm ? this.searchTerm.toLowerCase().trim() : '';
 
@@ -68,6 +68,11 @@ export default class FlowRecordButtons extends LightningElement {
             const isSelected = this.isMultiMode
                 ? this._selectedIds.includes(record.Id)
                 : (this.isSingleMode && this._singleSelectedId === record.Id);
+
+            // Per-record color if a color field is specified, otherwise use the global buttonColor
+            const bgColor = (this.buttonColorFieldApiName && record[this.buttonColorFieldApiName])
+                ? record[this.buttonColorFieldApiName]
+                : (this.buttonColor || '#0070d2');
 
             // Selected state: invert button colors
             const btnStyle = isSelected

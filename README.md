@@ -60,7 +60,8 @@ sf project deploy start --target-org YOUR_ORG_ALIAS
 | Search Placeholder | String | No | `Search...` | Placeholder text for the search bar |
 | Header Text | String | No | — | Heading above the buttons |
 | Sub-Header Text | String | No | — | Helper text below the heading |
-| Button Color | String | No | `#0070d2` | Hex color for button background |
+| Button Color | String | No | `#0070d2` | Hex color for button background (fallback when no color field is set) |
+| Button Color Field API Name | String | No | — | API name of a record field containing the button's background color (e.g., `Color__c`) |
 | Button Text Color | String | No | `#ffffff` | Hex color for button text |
 
 ### Output Variables

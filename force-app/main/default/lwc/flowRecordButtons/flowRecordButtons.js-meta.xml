@@ -63,8 +63,14 @@
                       type="String"
                       role="inputOnly"
                       label="Button Color"
-                      description="Hex color for button background (e.g., #0070d2). Defaults to Salesforce blue."
+                      description="Hex color for button background (e.g., #0070d2). Defaults to Salesforce blue. Overridden per record if Button Color Field is set."
                       default="#0070d2" />
+
+            <property name="buttonColorFieldApiName"
+                      type="String"
+                      role="inputOnly"
+                      label="Button Color Field API Name"
+                      description="Optional. API name of a field on the record whose value is used as that button's background color (e.g., Color__c). Falls back to Button Color when the field is blank." />
 
             <property name="buttonTextColor"
                       type="String"
