@@ -38,6 +38,27 @@
                       label="Sub-Header Text"
                       description="Optional helper text displayed below the heading" />
 
+            <property name="showSearch"
+                      type="Boolean"
+                      role="inputOnly"
+                      label="Show Search Bar"
+                      description="When enabled, displays a search bar above the buttons. Buttons that don't match the search are grayed out."
+                      default="false" />
+
+            <property name="searchPlaceholder"
+                      type="String"
+                      role="inputOnly"
+                      label="Search Placeholder"
+                      description="Placeholder text for the search bar."
+                      default="Search..." />
+
+            <property name="mode"
+                      type="String"
+                      role="inputOnly"
+                      label="Selection Mode"
+                      description="Controls how button clicks behave. 'auto' (default): click navigates immediately. 'single': click selects one record; click again to deselect. 'multi': click toggles selection of multiple records."
+                      default="auto" />
+
             <property name="buttonColor"
                       type="String"
                       role="inputOnly"
@@ -56,13 +77,25 @@
                       type="{T}"
                       role="outputOnly"
                       label="Selected Record"
-                      description="The full record of the button that was clicked" />
+                      description="The selected record (auto and single modes)" />
 
             <property name="selectedRecordId"
                       type="String"
                       role="outputOnly"
                       label="Selected Record ID"
-                      description="The record ID of the button that was clicked" />
+                      description="The selected record ID (auto and single modes)" />
+
+            <property name="selectedRecords"
+                      type="{T[]}"
+                      role="outputOnly"
+                      label="Selected Records"
+                      description="Collection of all selected records (multi mode)" />
+
+            <property name="selectedRecordIds"
+                      type="String"
+                      role="outputOnly"
+                      label="Selected Record IDs"
+                      description="Comma-separated list of selected record IDs (multi mode)" />
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>

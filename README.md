@@ -2,15 +2,16 @@
 
 [![Deploy to Salesforce](https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/src/main/webapp/resources/img/deploy.png)](https://githubsfdeploy.herokuapp.com/app/githubdeploy/jcd386/Flow-Record-Buttons?ref=main)
 
-A Lightning Web Component for Screen Flows that displays a record collection as clickable buttons. Clicking a button selects that record and automatically navigates to the next flow screen. Works with any Salesforce object.
+A Lightning Web Component for Screen Flows that displays a record collection as clickable buttons. Supports auto-navigation, single select, and multi-select modes. Works with any Salesforce object.
 
 ## Features
 
 - Works with any Salesforce object (Account, Contact, Opportunity, custom objects, etc.)
+- **Three selection modes**: auto-navigate on click, single select, or multi-select
+- **Search bar** — optional filter that grays out non-matching buttons as you type
 - Configurable display field — show Name, Subject, Title, or any field as button text
 - Buttons wrap into multiple rows when space is limited
-- Outputs the selected record and record ID for use in subsequent flow screens
-- Customizable button colors and optional header text
+- Customizable button colors and optional header/sub-header text
 
 ## Installation
 
@@ -37,7 +38,16 @@ sf project deploy start --target-org YOUR_ORG_ALIAS
    - **Object Type**: Select the object (e.g., Account)
    - **Records**: Assign a record collection variable
    - **Display Field API Name**: The field to show as button text (e.g., `Name`)
-4. On the next screen, use the `selectedRecord` or `selectedRecordId` output variables
+   - **Selection Mode**: Choose `auto`, `single`, or `multi`
+4. Use the output variables on subsequent flow screens
+
+### Selection Modes
+
+| Mode | Behavior | Use When |
+|------|----------|----------|
+| `auto` (default) | Click a button → immediately navigates to next screen | Picking one item and moving on |
+| `single` | Click to select (highlighted); click again to deselect | Choosing one item before a manual Next step |
+| `multi` | Click to toggle multiple selections on/off | Selecting multiple items at once |
 
 ### Configuration Properties
 
@@ -45,6 +55,9 @@ sf project deploy start --target-org YOUR_ORG_ALIAS
 |----------|------|----------|---------|-------------|
 | Records | Record Collection | Yes | — | The collection of records to display |
 | Display Field API Name | String | Yes | `Name` | API name of the field for button text |
+| Selection Mode | String | No | `auto` | `auto`, `single`, or `multi` |
+| Show Search Bar | Boolean | No | `false` | Displays a search bar above the buttons |
+| Search Placeholder | String | No | `Search...` | Placeholder text for the search bar |
 | Header Text | String | No | — | Heading above the buttons |
 | Sub-Header Text | String | No | — | Helper text below the heading |
 | Button Color | String | No | `#0070d2` | Hex color for button background |
@@ -52,18 +65,20 @@ sf project deploy start --target-org YOUR_ORG_ALIAS
 
 ### Output Variables
 
-| Variable | Type | Description |
-|----------|------|-------------|
-| Selected Record | Record | The full record that was clicked |
-| Selected Record ID | String | The ID of the clicked record |
+| Variable | Type | Modes | Description |
+|----------|------|-------|-------------|
+| Selected Record | Record | auto, single | The selected record |
+| Selected Record ID | String | auto, single | The ID of the selected record |
+| Selected Records | Record Collection | multi | All selected records |
+| Selected Record IDs | String | multi | Comma-separated list of selected IDs |
 
 ## Files
 
 | File | Description |
 |------|-------------|
-| `flowRecordButtons.js` | Component logic — handles click events, outputs, and flow navigation |
-| `flowRecordButtons.html` | Template with flex-wrap button grid |
-| `flowRecordButtons.css` | Button styling with hover/focus states |
+| `flowRecordButtons.js` | Component logic — selection modes, search filtering, flow navigation |
+| `flowRecordButtons.html` | Template with search bar and flex-wrap button grid |
+| `flowRecordButtons.css` | Button styling with hover, focus, and dimmed states |
 | `flowRecordButtons.js-meta.xml` | Flow Screen configuration with generic SObject type |
 
 ## License

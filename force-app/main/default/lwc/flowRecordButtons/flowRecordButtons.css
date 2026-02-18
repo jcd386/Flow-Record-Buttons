@@ -29,3 +29,8 @@
     outline: 2px solid #0070d2;
     outline-offset: 2px;
 }
+
+.record-btn.dimmed {
+    opacity: 0.25;
+    pointer-events: none;
+}

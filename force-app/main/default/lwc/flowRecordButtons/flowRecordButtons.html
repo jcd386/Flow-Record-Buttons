@@ -11,12 +11,25 @@
         </div>
     </template>
 
+    <!-- Search Bar -->
+    <template if:true={hasSearch}>
+        <div class="slds-m-bottom_small">
+            <lightning-input
+                type="search"
+                label="Search"
+                variant="label-hidden"
+                placeholder={searchPlaceholder}
+                onchange={handleSearchChange}>
+            </lightning-input>
+        </div>
+    </template>
+
     <!-- Buttons -->
     <template if:true={hasRecords}>
         <div class="button-grid">
             <template for:each={buttonItems} for:item="item">
                 <button key={item.key}
-                        class="record-btn"
+                        class={item.btnClass}
                         style={item.btnStyle}
                         data-record-id={item.recordId}
                         onclick={handleButtonClick}
